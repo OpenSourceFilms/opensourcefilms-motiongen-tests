@@ -1,0 +1,16 @@
+repos/
+envs/kimodo/
+envs/genmo/
+envs/stmc/
+envs/smplh_merge_tmp/
+caches/
+checkpoints/
+logs/
+outputs/genmo/
+outputs/stmc/
+*.zip
+*.tgz
+*.tar.xz
+*.ckpt
+*.pth
+.DS_Store
