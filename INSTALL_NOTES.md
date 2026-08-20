@@ -70,7 +70,10 @@ source envs/common_env.sh
 uv venv envs/genmo --python 3.10
 uv pip install --python envs/genmo/bin/python torch torchvision --index-url https://download.pytorch.org/whl/cu128
 cd repos/GENMO
-bash scripts/install_env.sh   # patched to point uv pip at envs/genmo/bin/python
+# scripts/install_env.sh's `uv pip install -e .` doesn't point uv at a specific interpreter, so it
+# can resolve to the wrong environment. Point it at this venv's python before running (idempotent):
+sed -i 's|^uv pip install -e \.$|uv pip install --python ../../envs/genmo/bin/python -e .|' scripts/install_env.sh
+bash scripts/install_env.sh
 ```
 (README's own quick-start suggests cu124 — overridden to cu128 for Blackwell per above.)
 

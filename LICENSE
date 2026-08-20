@@ -26,3 +26,7 @@ This license applies to Open Source Films' own code and documentation in this
 repository only. The three research projects evaluated (Kimodo, GENMO/GEM,
 STMC) are not vendored here and each keeps its own upstream license — see
 THIRD_PARTY_LICENSES.md.
+
+The one third-party-derived artifact included here,
+`outputs/kimodo/smoke_test_walk_wave.npz`, is covered by the Kimodo-SOMA-RP-v1
+model's own NVIDIA Open Model License, not by the MIT license above.

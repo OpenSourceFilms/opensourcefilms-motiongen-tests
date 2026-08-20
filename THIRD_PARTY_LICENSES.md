@@ -32,7 +32,12 @@ changes that; it documents the tools being tested, not this repo's own contents.
   commercial license from NVIDIA or a swap to a permissively-licensed alternative before commercial
   deployment.
 - **Not independently re-verified:** the license terms of the `nvidia/GEM-X` HuggingFace checkpoint
-  specifically (distinct from the code license above).
+  specifically (distinct from the code license above); `py-soma-x` (`NVlabs/SOMA-X`), pulled in as a
+  Kimodo dependency; the `nv-tlabs/kimodo-viser` fork, also a Kimodo dependency; the five small
+  vendored body-model tensor files fetched from `zju3dv/GVHMR` to work around the missing-file bug
+  documented in `INSTALL_NOTES.md` (`coco_aug_dict.pth`, `smpl_coco17_J_regressor.pt`,
+  `smplx_verts437.pt`, `smplx2smpl_sparse.pt`, `smpl_neutral_J_regressor.pt`) — inherit GVHMR's own
+  license terms, not independently checked here.
 
 ## STMC
 
@@ -43,6 +48,10 @@ changes that; it documents the tools being tested, not this repo's own contents.
 - **Commercial-use verdict:** non-commercial only, across code, dataset, and pretrained weights.
 - **Dependency:** SMPL+H body model (via `mano.is.tue.mpg.de` registration) — separately licensed,
   not redistributed.
+- **Not independently re-verified:** OpenAI's `CLIP` (`openai/CLIP`), an STMC dependency — commonly
+  MIT-licensed upstream, not individually re-audited here; `prepare/smplh.sh` and
+  `prepare/merge_smplh_mano.py`, pulled from `Mathux/TEMOS` to perform the SMPL+H/MANO merge STMC's
+  own README calls for but doesn't ship — inherit TEMOS's own license terms.
 
 ## Gated body-model assets (used by GENMO and/or STMC, not redistributed)
 
@@ -53,6 +62,13 @@ changes that; it documents the tools being tested, not this repo's own contents.
 - **HMR2 checkpoint / ViTPose-H** — third-party checkpoints sourced via a public Google Drive link
   from the GVHMR project (`zju3dv/GVHMR`); license terms not independently re-verified as part of
   this evaluation. Not redistributed here regardless.
+
+## Standard permissive libraries (not individually audited)
+
+General-purpose libraries used across all three environments: `torch`, `torchvision`, `numpy`,
+`scipy`, `opencv-python`, `huggingface_hub`, `gradio`, `viser`. These are well-established
+BSD/MIT/Apache-2.0 projects with no known non-commercial restriction. Check the specific version you
+install if in doubt.
 
 ## How these verdicts were reached
 
