@@ -22,11 +22,16 @@ SOFTWARE.
 
 ---
 
-This license applies to Open Source Films' own code and documentation in this
-repository only. The three research projects evaluated (Kimodo, GENMO/GEM,
-STMC) are not vendored here and each keeps its own upstream license — see
-THIRD_PARTY_LICENSES.md.
+This license applies to original code and documentation authored by Open
+Source Films and to any rights OSF holds in the generated numeric sample
+`outputs/kimodo/smoke_test_walk_wave.npz`. It does not purport to relicense
+third-party software, model weights, training data or other protected assets.
+The three evaluated projects (Kimodo, GENMO/GEM, STMC) are not vendored;
+see THIRD_PARTY_LICENSES.md for their separate terms.
 
-The one third-party-derived artifact included here,
-`outputs/kimodo/smoke_test_walk_wave.npz`, is covered by the Kimodo-SOMA-RP-v1
-model's own NVIDIA Open Model License, not by the MIT license above.
+The .npz sample is *generated output*, not a copy or derivative-model
+checkpoint. NVIDIA's Open Model License for the Kimodo-SOMA-RP-v1 model
+expressly states NVIDIA does not claim ownership of model outputs. Thus the
+model licence does not automatically govern or relicense the generated sample.
+This clarification does not claim exclusive OSF copyright in purely generated
+data or extinguish other parties' rights, if any, in underlying material.
