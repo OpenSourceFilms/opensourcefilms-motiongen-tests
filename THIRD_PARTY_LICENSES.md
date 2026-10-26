@@ -5,10 +5,14 @@ gated body-model assets — see the README's "What's not here" section. This doc
 independently verified about each upstream project's licensing, for anyone using `INSTALL_NOTES.md`
 to reproduce the evaluation themselves.
 
-OSF's own code in this repo (`launch_kimodo.sh`, `launch_stmc.sh`, `run_genmo_example.sh`,
-`run_smoke_tests.sh`, `envs/common_env.sh`, this documentation, and the included
-`outputs/kimodo/smoke_test_walk_wave.npz` result file) is MIT-licensed — see `LICENSE`. Nothing below
-changes that; it documents the tools being tested, not this repo's own contents.
+OSF-authored scripts and documentation in this repo are MIT-licensed. OSF
+also makes available any rights it holds in its synthetic numerical
+`outputs/kimodo/smoke_test_walk_wave.npz` result under those terms (see
+`LICENSE`). That file is an example of **model output**, not a redistributed
+model or weight file. NVIDIA's Open Model License expressly disclaims
+ownership of model outputs; the licence governing the checkpoint does not
+by itself license, own or restrict the generated sample. Underlying
+third-party material, if any, retains its own rights.
 
 ## Kimodo
 
