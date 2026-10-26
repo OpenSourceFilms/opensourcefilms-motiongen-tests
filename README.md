@@ -24,7 +24,10 @@ reinstalls, a missing-EGL-library fix, a GVHMR upstream-bug workaround) came out
 - **`outputs/kimodo/smoke_test_walk_wave.npz`** — the actual output of a successful Kimodo smoke
   test (150 frames of SOMA-skeleton motion data: joint positions, rotation matrices, root
   trajectory, foot contacts — pure numeric arrays, verified to contain nothing beyond the documented
-  motion-data schema).
+  motion-data schema). This is **generated sample data, not a model checkpoint**. OSF licenses
+  any rights it holds in the sample under the repository MIT terms; the NVIDIA model licence
+  governs the checkpoint separately and states NVIDIA does not claim ownership of generated
+  outputs. See [the licensing details](THIRD_PARTY_LICENSES.md).
 
 ## What's *not* here, and why
 
