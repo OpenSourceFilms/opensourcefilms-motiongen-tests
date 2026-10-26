@@ -101,17 +101,33 @@ message. In particular, `run_smoke_tests.sh all` fails if its Kimodo
 test fails; STMC does not claim outputs after a failed generation.
 The `all` mode still runs only Kimodo, not GENMO/STMC.
 
+**STMC Gradio sharing guard:** `launch_stmc.sh` runs
+`envs/disable_stmc_share.py` before starting `app.py`. It accepts only
+one simple, module-level `SHARE = True` or `SHARE = False` declaration
+in the upstream `repos/stmc/app_config.py`. It changes True to False
+atomically, leaves an existing False unchanged, and **refuses to launch**
+if the declaration is absent, ambiguous, dynamic or otherwise changed by
+upstream. The former unverified `sed` replacement could silently miss
+spacing changes and start a demo with a public Gradio share link enabled.
+This safeguard only checks the intended upstream configuration variable:
+it cannot prove that a later STMC version doesn't create other public links.
+The RunPod HTTP proxy remains independently reachable when configured;
+no authentication is added by this guard. Use a trusted access-controlled
+deployment environment rather than treating `SHARE=False` as a firewall.
+
 ## Offline publication checks
 
 The repository's [public GitHub Actions workflow](.github/workflows/offline-acceptance.yml)
-runs six CPU-only **sample/schema and shell-syntax** tests and six
-additional **launcher-behaviour** tests. The former verify the **already
-published** `outputs/kimodo/smoke_test_walk_wave.npz` artifact: seven
+runs six CPU-only **sample/schema and shell-syntax** tests, six
+**smoke-launcher behaviour** tests and eight **STMC sharing-guard** tests.
+The first group verifies the **already published** `outputs/kimodo/smoke_test_walk_wave.npz` artifact: seven
 numeric/bool fields, expected dtypes and dimensions, consistent 150-frame
 length, finite floating-point values, no object/pickle arrays, and 77-joint
-motion geometry. The latter run copied shell wrappers only against
-**isolated fake binaries** to verify success/failure reporting and log
-creation without invoking any motion-generation model.
+motion geometry. The launcher and sharing-guard tests run copied shell
+wrappers only against **isolated fake binaries** and disposable upstream
+configuration files to verify success/failure reporting, log creation,
+sharing deactivation and fail-closed behaviour without invoking any
+motion-generation model.
 
 Only NumPy is installed for the artifact checks; launcher tests use
 Python's standard library. No GPU, Kimodo/GENMO/STMC model, weights,
