@@ -94,19 +94,29 @@ reinstall forced by an unpinned transitive dependency).
 
 See `RUNPOD.md` for pod-specific GPU/proxy notes.
 
+The CLI wrappers `run_smoke_tests.sh` and `run_genmo_example.sh` now
+create their own `logs/` directory and propagate a failing model-command
+or log-write exit status rather than printing a misleading completion
+message. In particular, `run_smoke_tests.sh all` fails if its Kimodo
+test fails; STMC does not claim outputs after a failed generation.
+The `all` mode still runs only Kimodo, not GENMO/STMC.
+
 ## Offline publication checks
 
 The repository's [public GitHub Actions workflow](.github/workflows/offline-acceptance.yml)
-runs six CPU-only tests. These verify the **already published**
-`outputs/kimodo/smoke_test_walk_wave.npz` artifact: seven numeric/bool
-fields, expected dtypes and dimensions, consistent 150-frame length, finite
-floating-point values, no object/pickle arrays, and 77-joint motion
-geometry. The tests also perform `bash -n` syntax checks of the five
-published shell scripts without executing model commands.
+runs six CPU-only **sample/schema and shell-syntax** tests and six
+additional **launcher-behaviour** tests. The former verify the **already
+published** `outputs/kimodo/smoke_test_walk_wave.npz` artifact: seven
+numeric/bool fields, expected dtypes and dimensions, consistent 150-frame
+length, finite floating-point values, no object/pickle arrays, and 77-joint
+motion geometry. The latter run copied shell wrappers only against
+**isolated fake binaries** to verify success/failure reporting and log
+creation without invoking any motion-generation model.
 
-Only NumPy is installed for the tests. No GPU, Kimodo/GENMO/STMC model,
-weights, human subject imagery or RunPod service is required. A passing
-result **does not** validate model installation, launchers in a current GPU
+Only NumPy is installed for the artifact checks; launcher tests use
+Python's standard library. No GPU, Kimodo/GENMO/STMC model, weights,
+human subject imagery or RunPod service is required. A passing result
+**does not** validate model installation, launchers in a current GPU
 environment, kinematic realism, motion quality or any upstream licences.
 The captured output artifact and original research verdicts are unchanged.
 
