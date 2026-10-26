@@ -26,14 +26,14 @@ if [ ! -f "$VIDEO" ]; then
 fi
 
 OUTPUT_ROOT="$ROOT/outputs/genmo"
-mkdir -p "$OUTPUT_ROOT"
+mkdir -p "$OUTPUT_ROOT" "$ROOT/logs"
 
-cd "$ROOT/repos/GENMO"
+cd "$ROOT/repos/GENMO" || exit $?
 
 python scripts/demo/demo_smpl.py \
   --input_list "$VIDEO" "$TEXT_PROMPT" \
   --hmr2_ckpt "$ROOT/checkpoints/genmo/hmr2/epoch=10-step=25000.ckpt" \
   --output_root "$OUTPUT_ROOT" \
-  2>&1 | tee "$ROOT/logs/genmo_example.log"
+  2>&1 | tee "$ROOT/logs/genmo_example.log" || exit $?
 
 echo "=== Output written under: $OUTPUT_ROOT ==="
