@@ -91,6 +91,22 @@ reinstall forced by an unpinned transitive dependency).
 
 See `RUNPOD.md` for pod-specific GPU/proxy notes.
 
+## Offline publication checks
+
+The repository's [public GitHub Actions workflow](.github/workflows/offline-acceptance.yml)
+runs six CPU-only tests. These verify the **already published**
+`outputs/kimodo/smoke_test_walk_wave.npz` artifact: seven numeric/bool
+fields, expected dtypes and dimensions, consistent 150-frame length, finite
+floating-point values, no object/pickle arrays, and 77-joint motion
+geometry. The tests also perform `bash -n` syntax checks of the five
+published shell scripts without executing model commands.
+
+Only NumPy is installed for the tests. No GPU, Kimodo/GENMO/STMC model,
+weights, human subject imagery or RunPod service is required. A passing
+result **does not** validate model installation, launchers in a current GPU
+environment, kinematic realism, motion quality or any upstream licences.
+The captured output artifact and original research verdicts are unchanged.
+
 ## Status
 
 Research evaluation / compatibility testing, run once to completion on 2026-07 against a specific
