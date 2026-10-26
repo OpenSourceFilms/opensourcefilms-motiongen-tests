@@ -1,6 +1,6 @@
 #!/bin/bash
 # Launch the STMC Gradio timeline-to-motion demo.
-# Forces SHARE=False in app_config.py (no public gradio.live share link) and
+# Verifies and forces SHARE=False in app_config.py (no public gradio.live share link) and
 # binds 0.0.0.0:7862 via GRADIO_SERVER_NAME/PORT so RunPod's HTTP proxy can
 # reach it — expose/forward port 7862 on the pod to open it from your browser.
 #
@@ -10,7 +10,7 @@
 # the next free port. 7862 avoids that collision.
 #
 # Usage: bash launch_stmc.sh
-set -uo pipefail
+set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
@@ -19,8 +19,9 @@ source "$ROOT/envs/common_env.sh"
 
 cd "$ROOT/repos/stmc"
 
-# Disable the public Gradio share link (idempotent — only flips True -> False).
-sed -i 's/^SHARE = True/SHARE = False/' app_config.py
+# Disable the public Gradio share link and abort if upstream changed its
+# config format. An unchecked sed substitution could silently leave SHARE=True.
+python3 "$ROOT/envs/disable_stmc_share.py" "$ROOT/repos/stmc/app_config.py"
 
 export GRADIO_SERVER_NAME="${GRADIO_SERVER_NAME:-0.0.0.0}"
 export GRADIO_SERVER_PORT="${GRADIO_SERVER_PORT:-7862}"

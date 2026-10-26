@@ -8,7 +8,7 @@ on:
       - "tests/**"
       - "outputs/kimodo/**"
       - "*.sh"
-      - "envs/*.sh"
+      - "envs/**"
       - "README.md"
   pull_request:
   workflow_dispatch:
@@ -33,3 +33,5 @@ jobs:
         run: python -B -m unittest discover -s tests -p 'test_motiongen_published_sample.py' -v
       - name: Test smoke launcher error reporting with fake binaries
         run: python -B -m unittest discover -s tests -p 'test_motiongen_launchers.py' -v
+      - name: Check STMC share setting is disabled before fake launch
+        run: python -B -m unittest discover -s tests -p 'test_stmc_share_guard.py' -v
